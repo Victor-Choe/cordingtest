@@ -28,6 +28,7 @@
 def romanToInt(s):
     romans = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
     total = 0
+    #previous 에 첫 문자를 기본값으로 넣어주지 않으면 IV 같은경우 previous 가 0 이라 계산이 되지 않기에 previous 에 첫 문자값s[0] 을 대입 
     empty=s[0]
     previous=romans[empty]
 #들어오는 값들을 미리 딕셔너리로 구현,return 할 total 변수 생성
@@ -41,3 +42,52 @@ def romanToInt(s):
             previous=romans[i]
             total+=romans[i]
     return total
+
+# leet code 최종 코드
+# class Solution:
+#     def romanToInt(self, s: str) -> int:
+#         romans = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+#         total = 0
+#         empty=s[0]
+#         previous=romans[empty]
+#         for i in s:
+#             if romans[i]>previous:
+#                 total+=romans[i]-2*previous 
+#             else:
+#                 previous=romans[i]
+#                 total+=romans[i]
+#         return total
+
+#다른사람이 푼 좋은 방법 : 4랑 9, 40,90,400,900 을 미리 치환하여 예외처리함.
+
+# class Solution:
+#     def romanToInt(self, s: str) -> int:
+#         translations = {
+#             "I": 1,
+#             "V": 5,
+#             "X": 10,
+#             "L": 50,
+#             "C": 100,
+#             "D": 500,
+#             "M": 1000
+#         }
+#         number = 0
+#         s = s.replace("IV", "IIII").replace("IX", "VIIII")
+#         s = s.replace("XL", "XXXX").replace("XC", "LXXXX")
+#         s = s.replace("CD", "CCCC").replace("CM", "DCCCC")
+#         for char in s:
+#             number += translations[char]
+#         return number
+
+#초기값 대신 역순으로 푸는 방법
+
+# def romanToInt(self, s: str) -> int:
+# 	res, prev = 0, 0
+# 	dict = {'I':1, 'V':5, 'X':10, 'L':50, 'C':100, 'D':500, 'M':1000}
+# 	for i in s[::-1]:          # rev the s
+# 		if dict[i] >= prev:
+# 			res += dict[i]     # sum the value iff previous value same or more
+# 		else:
+# 			res -= dict[i]     # substract when value is like "IV" --> 5-1, "IX" --> 10 -1 etc 
+# 		prev = dict[i]
+# 	return res
