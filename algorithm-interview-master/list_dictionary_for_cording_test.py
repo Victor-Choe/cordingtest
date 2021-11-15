@@ -1,0 +1,16 @@
+a= [1,2,3,4,5,6,7,8]
+
+print(len(a))
+print(a[3])
+print(a[1:3])
+print(5 in a)
+print(a.count(4))
+print(a.index(5))
+a.append(9)
+print(a)
+a.pop(4)
+print(a)
+a.pop()
+print(a)
+a.pop(0)
+print(a)
